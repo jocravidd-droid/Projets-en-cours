@@ -1,16 +1,18 @@
-# Class bundles data and methods
-class TextProcessor:
-    def __init__(self, text):
-        self.text = text
-    
-    def clean(self):
-        self.text = self.text.strip().lower()
-        return self
-    
-    def remove_punctuation(self):
-        self.text = self.text.replace(".", "").replace(",", "")
-        return self
+# app.py
+from dotenv import load_dotenv
+import os
+import requests
 
-# Chain methods on object
-processor = TextProcessor(text="  Hello, World.  ")
-result = processor.clean().remove_punctuation().text
+# Load environment variables
+load_dotenv()
+
+# Get API key
+API_KEY = os.environ.get('OPENAI_API_KEY')
+
+if not API_KEY:
+    print("Please set OPENAI_API_KEY in .env file")
+    exit(1)
+
+# Use the API
+headers = {"Authorization": f"Bearer {API_KEY}"}
+# Make your API calls...
