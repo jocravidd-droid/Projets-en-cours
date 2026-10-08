@@ -4,3 +4,13 @@ __pycache__/
 
 # Logs
 *.log
+
+# Environnements virtuels
+.env/
+env/
+venv/
+.venv/
+
+# Variables d'environnement
+.env
+.env.*
