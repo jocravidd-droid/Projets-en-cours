@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.pyc
+.DS_Store
 
 # Logs
 *.log
@@ -14,3 +15,7 @@ venv/
 # Variables d'environnement
 .env
 .env.*
+
+# VS Code
+
+.code-workspace
