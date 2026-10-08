@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+from google import genai
 
 # ===== Récuperation Emplacement =======
 

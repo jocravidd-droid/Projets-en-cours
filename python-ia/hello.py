@@ -1,9 +1,6 @@
-import time
-import os
+text = "Bonjour tout le monde"
+max_length = 7
 
-# ======== Affichage Ecran =======
+text = text[:max_length]
 
-print(">> hello word")
-time.sleep(1)
-os.chmod("get_data.py", 600)
-print(">> you is ready")
+print(text)
