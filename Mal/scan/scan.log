@@ -1,0 +1,3 @@
+2026-09-05 16:07:25,587 [WARNING] Max connections (900) lower than port range, scan may be slow
+2026-09-05 16:07:25,588 [INFO] [Target: 127.0.0.1 - Range Port: 1 to 65535 - Timeout: 1 - Max Connection: 900]
+2026-09-05 16:07:37,257 [INFO] Scan finished, 10 open port(s) found: [631, 5355, 9050, 27017, 34713, 35346, 36323, 36373, 44301, 54299]
