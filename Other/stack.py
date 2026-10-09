@@ -6,13 +6,15 @@ This is representation of a stack with infinite size, where the first element is
 detaille : designed to demonstrate the concept of a stack with infinite size, where the first element is removed when the stack reaches its maximum size. The function can be used to simulate a stack with infinite size by continuously adding new elements and removing the first element when the stack reaches its maximum size.
 """
 
-def stack_infini(numbers = [1, 2, 3, 4, 5]):
 
-    for i in range(0, len(numbers)+5):
+def stack_infini(numbers=[1, 2, 3, 4, 5]):
+
+    for i in range(len(numbers) + 5):
         numbers.append(i)
         del numbers[0]
 
     return numbers
+
 
 x = stack_infini()
 print(x)

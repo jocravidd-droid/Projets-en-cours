@@ -4,14 +4,16 @@ def fonction_multiplication(cal):
         debut = debut * number
     return debut
 
+
 def fonction_division(cal):
     debut = cal[0]
     try:
         for number in cal[1:]:
             debut = debut / number
     except ZeroDivisionError:
-        return 'une division par zéro et impossible'
+        return "une division par zéro et impossible"
     return debut
+
 
 def fonction_soustraction(cal):
     debut = cal[0]
@@ -19,17 +21,20 @@ def fonction_soustraction(cal):
         debut = debut - number
     return debut
 
+
 def plus_petit(cal):
     debut = cal[0]
     for number in cal[1:]:
         debut = min(debut, number)
     return debut
 
+
 def plus_grand(cal):
     debut = cal[0]
     for number in cal[1:]:
         debut = max(debut, number)
     return debut
+
 
 def superieur_egal(cal):
     debut = cal[0]
@@ -38,12 +43,14 @@ def superieur_egal(cal):
             debut = number
     return debut
 
+
 def inferieur_egal(cal):
     debut = cal[0]
     for number in cal[1:]:
         if number <= debut:  # noqa: PLR1730
             debut = number
     return debut
+
 
 def egal(cal):
     boite = True
@@ -56,8 +63,7 @@ def egal(cal):
     return boite
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     x = fonction_multiplication([2, 4, 5])
     print(x)
 

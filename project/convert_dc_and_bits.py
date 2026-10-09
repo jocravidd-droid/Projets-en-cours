@@ -1,5 +1,4 @@
 while True:
-
     menu = """
 ╔══════════════════════════════════════════════╗
 ║                  MENU PRINCIPAL              ║
@@ -11,12 +10,12 @@ while True:
 """
 
     # convertisseur decimal en binaire
-    def convert_dec_bin(number, list_bin = []):
+    def convert_dec_bin(number, list_bin=[]):
 
         if number == 0:
             return number
         elif number < 0:
-            return 'number postivie !'
+            return "number postivie !"
 
         q = number // 2
 
@@ -37,15 +36,15 @@ while True:
         decimal = 0
 
         # effectue le calcul du dernier chiffre au premier 'chiffre x 2 puissance n'
-        for i,l in enumerate(digit):
+        for i, l in enumerate(digit):
             decimal += int(l) * 2**i
         return decimal
 
-    if __name__ == '__main__':
+    if __name__ == "__main__":
         try:
             choice_convert = int(input(menu + "\nVotre choix : "))
             if choice_convert == 0:
-                choice = int(input('\nDecimal has convert (0 for exit) : '))
+                choice = int(input("\nDecimal has convert (0 for exit) : "))
                 if choice == 0:
                     print("Good Bye")
                     break
@@ -53,7 +52,7 @@ while True:
                     b = convert_dec_bin(choice)
                     print(f"In bits is {b}")
             elif choice_convert == 1:
-                choice = int(input('\nBits has convert (0 for exit) : '))
+                choice = int(input("\nBits has convert (0 for exit) : "))
                 if choice == 0:
                     print("Good Bye")
                     break
@@ -64,9 +63,9 @@ while True:
                 print("GOOD BYE")
                 break
             else:
-                print("Choice Unknow") # type: ignore
-        except ValueError as e:
-            print(f"In integer pls !!")
+                print("Choice Unknow")  # type: ignore
+        except ValueError:
+            print("In integer pls !!")
         except (KeyboardInterrupt, EOFError):
             print("\nCLOSE PROGAMME !")
             break

@@ -1,18 +1,12 @@
-# app.py
-from dotenv import load_dotenv
-import os
-import requests
+def calculate_total(items):
+    total = 0
+    for item in items:
+        total += item["price"] * item["quantity"]
+    return total
 
-# Load environment variables
-load_dotenv()
 
-# Get API key
-API_KEY = os.environ.get('OPENAI_API_KEY')
-
-if not API_KEY:
-    print("Please set OPENAI_API_KEY in .env file")
-    exit(1)
-
-# Use the API
-headers = {"Authorization": f"Bearer {API_KEY}"}
-# Make your API calls...
+shopping_cart = [
+    {"name": "apple", "price": 0.5, "quantity": 6},
+    {"name": "banana", "price": 0.3, "quantity": 8},
+]
+print(calculate_total(shopping_cart))

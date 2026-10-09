@@ -1,4 +1,4 @@
-from annuaire_telephonique.py import ajouter_contact, rechercher_contact, info
+from annuaire_telephonique.py import ajouter_contact, info, rechercher_contact
 
 
 def test_ajouter_contact():

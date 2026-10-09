@@ -10,17 +10,17 @@ while True:
             case "CG":
                 P = float(input("Premier terme : "))
                 Q = float(input("Raison (q) : "))
-                print(f"Le terme {P} de raison q = {Q}")
+                print(f"le terme {P} de raison q = {Q}")
                 start = int(
-                    input("Terme de départ (exemple : U2 = 2, terme de départ) : ")
+                    input("Terme de départ (exemple: U2 = 2 terme de depart) : ")
                 )
-                stop = int(input("Terme d'arrêt (exemple: U2 a U10 = 10) : "))
+                stop = int(input("Terme d'arret (exemple: U1 a U10 = 10) : "))
                 if start <= 0:
                     print(
                         f"Mon programme n'accepte pas un indice de départ inférieur ou égal à 0 : {start}."
                     )
                 elif stop < start:
-                    print(f"La fin du compte : {stop} est plus petite que le début.")
+                    print(f"La fin du compte : {stop} et plus petit que le debut")
                 else:
                     for i in range(start, stop + 1):
                         U = P * Q ** (i - 1)
@@ -28,17 +28,15 @@ while True:
             case "S":
                 P = float(input("Premier terme : "))
                 Q = float(input("Raison (q) : "))
-                n = int(input("Somme de combien de termes : "))
+                n = int(input("Somme de quel chiffre : "))
                 if n < 1:
-                    print(
-                        "Le nombre de termes utilisé pour la somme ne peut pas être inférieur à 1."
-                    )
+                    print("Le chiffre qui sert a la somme ne peut etre inferieur a 1")
+                    break
                 elif Q != 1:
                     S = P * ((1 - Q**n) / (1 - Q))
-                    print(f"La somme et : {round(S, 2)}")
                 else:
                     S = P * n
-                    print(f"La somme et : {round(S, 2)}")
+                print(f"La somme et : {round(S, 2)}")
             case "CA":
                 P = float(input("Premier terme : "))
                 R = float(input("Raison (r) : "))
@@ -46,7 +44,7 @@ while True:
                 start = int(
                     input("Terme de départ (exemple: U2 = 2 terme de depart) : ")
                 )
-                stop = int(input("Terme d'arret (exemple: U2 a U10 = 10) : "))
+                stop = int(input("Terme d'arret (exemple: U1 a U10 = 10) : "))
                 if start <= 0:
                     print(
                         f"Mon programme n'accepte pas un indice de départ inférieur ou égal à 0 : {start}."

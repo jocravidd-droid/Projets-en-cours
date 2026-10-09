@@ -1,7 +1,7 @@
 import asyncio
-from pathlib import Path
 import logging
 import re
+from pathlib import Path
 
 print(r"""
                 ╭───────────────────────────────────────────────╮
@@ -45,7 +45,6 @@ ports_services_complet = {
     873: "Rsync",
     993: "IMAPS",
     995: "POP3S",
-    
     # --- Ports Enregistrés (1024 - 49151) ---
     1194: "OpenVPN",
     1433: "Microsoft SQL Server",
@@ -70,7 +69,7 @@ ports_services_complet = {
     9090: "WebSM / Prometheus",
     9200: "Elasticsearch",
     10000: "Webmin",
-    27017: "MongoDB"
+    27017: "MongoDB",
 }
 
 extensions_domaine_complet = {
@@ -83,7 +82,6 @@ extensions_domaine_complet = {
     ".name": "Personnel / Individuel",
     ".pro": "Professionnels",
     ".mobi": "Sites Mobiles",
-
     # --- Techniques et Startups ---
     ".tech": "Technologie",
     ".io": "Startups / Input-Output",
@@ -94,7 +92,6 @@ extensions_domaine_complet = {
     ".crypto": "Cryptomonnaie / Web3",
     ".cloud": "Cloud Computing",
     ".data": "Données",
-
     # --- Business et Web Marketing ---
     ".online": "Présence En Ligne",
     ".store": "Boutique en ligne",
@@ -105,7 +102,6 @@ extensions_domaine_complet = {
     ".marketing": "Marketing",
     ".company": "Entreprises",
     ".digital": "Numérique",
-
     # --- Médias et Communautés ---
     ".blog": "Blogs",
     ".media": "Médias / Actualités",
@@ -115,7 +111,6 @@ extensions_domaine_complet = {
     ".club": "Clubs / Communautés",
     ".space": "Espace Communautaire",
     ".studio": "Studios de création",
-
     # --- Géographiques Principaux (ccTLDs) ---
     ".fr": "France",
     ".be": "Belgique",
@@ -130,12 +125,11 @@ extensions_domaine_complet = {
     ".nl": "Pays-Bas",
     ".jp": "Japon",
     ".cn": "Chine",
-
     # --- Institutionnels ---
     ".edu": "Éducation (USA)",
     ".gov": "Gouvernement (USA)",
     ".mil": "Militaire (USA)",
-    ".int": "Organisations Internationales"
+    ".int": "Organisations Internationales",
 }
 
 
@@ -143,11 +137,9 @@ log_dir = Path("scan")
 log_dir.mkdir(parents=True, exist_ok=True)
 
 logging.basicConfig(
-
-    level=logging.INFO, # logging.DEBUG, logging.WARNING, logging.ERROR, logging.CRITICAL
+    level=logging.INFO,  # logging.DEBUG, logging.WARNING, logging.ERROR, logging.CRITICAL
     format="%(asctime)s [%(levelname)s] %(message)s",
-    filename=log_dir / "scan.log"
-
+    filename=log_dir / "scan.log",
 )
 
 
@@ -158,11 +150,16 @@ class Scanner:
         self.results = []
         self.timeout_value = timeout_value
         self.semaphore = semaphore
+
     async def scan(self):
-        tasks = [scan_port(self.target, port, self.timeout_value, self.semaphore) for port in self.port_range]
+        tasks = [
+            scan_port(self.target, port, self.timeout_value, self.semaphore)
+            for port in self.port_range
+        ]
         result = await asyncio.gather(*tasks)
         save = [p for p in result if p is not None]
         return save
+
 
 async def scan_port(target, port, timeout_value, semaphore):
     async with semaphore:
@@ -177,31 +174,33 @@ async def scan_port(target, port, timeout_value, semaphore):
             logging.debug(f"Port {port} closed or unreachable")
             return None
 
-def consultation(objet, ref, val = ''):
+
+def consultation(objet, ref, val=""):
     if hasattr(objet, ref):
         result = getattr(objet, ref)
         print(result)
     else:
-        creation = input('Confirm Creation(y or n): ')
-        if creation.lower() == 'n':
+        creation = input("Confirm Creation(y or n): ")
+        if creation.lower() == "n":
             return
         else:
-            value = input('has him a value(value or n): ')
-            if value.lower() == 'n':
-                print('No have value !')
+            value = input("has him a value(value or n): ")
+            if value.lower() == "n":
+                print("No have value !")
                 return
-            elif value == '':
-                print('Value is empty')
+            elif value == "":
+                print("Value is empty")
                 return
             else:
                 setattr(objet, ref, value)
                 print(getattr(objet.ref))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     while True:
         try:
-            get = input('\nTarget or exit: ').strip()
-            if get.lower() == 'exit':
+            get = input("\nTarget or exit: ").strip()
+            if get.lower() == "exit":
                 print("\nExiting")
                 break
             if not get:
@@ -223,17 +222,25 @@ if __name__ == '__main__':
                 continue
 
             start_port = int(input("Start_port: "))
-            end_port = int(input('End_port (limit 65535): '))
-            timeout_value = int(input('Timeout: '))
+            end_port = int(input("End_port (limit 65535): "))
+            timeout_value = int(input("Timeout: "))
             if timeout_value > 1:
-                logging.warning(f"High timeout value ({timeout_value}s), scan may be slow")
-            max_co = int(input('Max Connections: '))
+                logging.warning(
+                    f"High timeout value ({timeout_value}s), scan may be slow"
+                )
+            max_co = int(input("Max Connections: "))
             if max_co < end_port:
-                logging.warning(f"Max connections ({max_co}) lower than port range, scan may be slow")
+                logging.warning(
+                    f"Max connections ({max_co}) lower than port range, scan may be slow"
+                )
             semaphore = asyncio.Semaphore(max_co)
             if start_port > end_port:
-                logging.error(f"Invalid range: start port {start_port} is greater than end port {end_port}")
-                print(f"\nStart port ({start_port}) must be smaller than end port ({end_port})")
+                logging.error(
+                    f"Invalid range: start port {start_port} is greater than end port {end_port}"
+                )
+                print(
+                    f"\nStart port ({start_port}) must be smaller than end port ({end_port})"
+                )
             elif start_port < 1:
                 logging.error(f"Invalid start port: {start_port} (must be at least 1)")
                 print("Start port must be at least 1")
@@ -241,8 +248,12 @@ if __name__ == '__main__':
                 logging.error(f"Invalid end port: {end_port} (maximum is 65535)")
                 print("End port cannot exceed 65535")
             else:
-                logging.info(f"[Target: {target} - Range Port: {start_port} to {end_port} - Timeout: {timeout_value} - Max Connection: {max_co}]")
-                sc = Scanner(target, range(start_port, end_port + 1), timeout_value, semaphore)
+                logging.info(
+                    f"[Target: {target} - Range Port: {start_port} to {end_port} - Timeout: {timeout_value} - Max Connection: {max_co}]"
+                )
+                sc = Scanner(
+                    target, range(start_port, end_port + 1), timeout_value, semaphore
+                )
                 info = asyncio.run(sc.scan())
                 logging.info(f"Scan finished, {len(info)} open port(s) found: {info}")
                 new_info = []
@@ -254,15 +265,15 @@ if __name__ == '__main__':
                 maj_info = ""
                 for p, service in new_info:
                     maj_info += f"{p} ({service})\n"
-                print(f'\nPort Found for {target}:\n{maj_info}')
+                print(f"\nPort Found for {target}:\n{maj_info}")
                 consult = input("Consultation(y or n): ")
-                if consult.lower() == 'n':
+                if consult.lower() == "n":
                     continue
                 else:
-                    ref = input('What do you find: ')
+                    ref = input("What do you find: ")
                     consultation(sc, ref)
         except ValueError:
-            print('\nEnter an integer')
+            print("\nEnter an integer")
         except (EOFError, KeyboardInterrupt):
-            print('\n\nInterrupted')
+            print("\n\nInterrupted")
             break
